@@ -14,6 +14,8 @@ public:
     void addMachine(Machine* m);   // vraag 20: useful member function
     const std::vector<Machine*>& getMachines() const;
 
+    void processAll();             // vraag 20: useful member function
+
 private:
     std::vector<Machine*> machines;   // vraag 36
 };

@@ -1,5 +1,6 @@
 #include "FactoryView.h"
 #include "Drill.h"
+#include "Conveyor.h"
 
 
 FactoryView::FactoryView(FactoryEngine* eng, ToolbarController* tb, QWidget* parent)
@@ -40,4 +41,11 @@ void FactoryView::mousePressEvent(QMouseEvent* event)
         engine->addMachine(new Drill(row, col));   // vraag 18
         update();
     }
+
+    if (toolbar->currentTool() == Tool::PlaceConveyor)
+    {
+        engine->addMachine(new Conveyor(row, col, Direction::Right));   // vraag 18
+        update();
+    }
+
 }

@@ -25,20 +25,22 @@ class Ui_MainWindow
 {
 public:
     QAction *actionAddDrill;
+    QAction *actionAddConveyor;
     QAction *actionDeselect;
     QWidget *centralwidget;
     QMenuBar *menubar;
     QMenu *menuTools;
-    QToolBar *toolBar;
+    QToolBar *mainToolBar;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(800, 600);
         actionAddDrill = new QAction(MainWindow);
         actionAddDrill->setObjectName("actionAddDrill");
+        actionAddConveyor = new QAction(MainWindow);
+        actionAddConveyor->setObjectName("actionAddConveyor");
         actionDeselect = new QAction(MainWindow);
         actionDeselect->setObjectName("actionDeselect");
         centralwidget = new QWidget(MainWindow);
@@ -46,22 +48,24 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        MainWindow->setMenuBar(menubar);
-        menuTools = new QMenu(MainWindow);
+        menubar->setGeometry(QRect(0, 0, 800, 22));
+        menuTools = new QMenu(menubar);
         menuTools->setObjectName("menuTools");
-        MainWindow->setCentralWidget(menuTools);
-        toolBar = new QToolBar(MainWindow);
-        toolBar->setObjectName("toolBar");
-        MainWindow->addToolBar(toolBar);
+        MainWindow->setMenuBar(menubar);
+        mainToolBar = new QToolBar(MainWindow);
+        mainToolBar->setObjectName("mainToolBar");
+        MainWindow->addToolBar(mainToolBar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
         MainWindow->setStatusBar(statusbar);
 
         menubar->addAction(menuTools->menuAction());
         menuTools->addAction(actionAddDrill);
+        menuTools->addAction(actionAddConveyor);
         menuTools->addAction(actionDeselect);
-        toolBar->addAction(actionAddDrill);
-        toolBar->addAction(actionDeselect);
+        mainToolBar->addAction(actionAddDrill);
+        mainToolBar->addAction(actionAddConveyor);
+        mainToolBar->addAction(actionDeselect);
 
         retranslateUi(MainWindow);
 
@@ -72,8 +76,10 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "FactorySim", nullptr));
         actionAddDrill->setText(QCoreApplication::translate("MainWindow", "Add Drill", nullptr));
+        actionAddConveyor->setText(QCoreApplication::translate("MainWindow", "Add Conveyor", nullptr));
         actionDeselect->setText(QCoreApplication::translate("MainWindow", "Deselect", nullptr));
         menuTools->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
+        mainToolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
     } // retranslateUi
 
 };

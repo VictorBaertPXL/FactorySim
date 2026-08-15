@@ -41,7 +41,8 @@ template <> constexpr inline auto ToolbarController::qt_create_metaobjectdata<qt
         "ToolbarController",
         "onAddDrillClicked",
         "",
-        "onDeselectClicked"
+        "onDeselectClicked",
+        "onAddConveyorClicked"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -49,6 +50,8 @@ template <> constexpr inline auto ToolbarController::qt_create_metaobjectdata<qt
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'onDeselectClicked'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'onAddConveyorClicked'
+        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -74,6 +77,7 @@ void ToolbarController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         switch (_id) {
         case 0: _t->onAddDrillClicked(); break;
         case 1: _t->onDeselectClicked(); break;
+        case 2: _t->onAddConveyorClicked(); break;
         default: ;
         }
     }
@@ -99,14 +103,14 @@ int ToolbarController::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }

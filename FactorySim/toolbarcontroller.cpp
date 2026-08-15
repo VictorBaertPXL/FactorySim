@@ -19,3 +19,8 @@ void ToolbarController::onDeselectClicked()
 {
     tool = Tool::None;
 }
+
+void ToolbarController::onAddConveyorClicked()
+{
+    tool = Tool::PlaceConveyor;
+}

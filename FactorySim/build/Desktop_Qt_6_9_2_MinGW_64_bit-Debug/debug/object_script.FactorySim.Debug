@@ -1,6 +1,6 @@
 debug/assembler.o
 debug/bugtracker.o
-debug/converyor.o
+debug/conveyor.o
 debug/drill.o
 debug/factoryengine.o
 debug/factorygrid.o

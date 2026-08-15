@@ -7,8 +7,10 @@
 
 enum class Tool {
     None,
-    PlaceDrill
+    PlaceDrill,
+    PlaceConveyor    // vraag 33
 };
+
 
 class ToolbarController : public QObject
 {
@@ -22,6 +24,7 @@ public:
 public slots:
     void onAddDrillClicked();
     void onDeselectClicked();
+    void onAddConveyorClicked();
 
 private:
     Tool tool;   // vraag 22: useful member variable

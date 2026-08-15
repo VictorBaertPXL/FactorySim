@@ -11,7 +11,7 @@ CONFIG += c++17
 SOURCES += \
     assembler.cpp \
     bugtracker.cpp \
-    converyor.cpp \
+    conveyor.cpp \
     drill.cpp \
     factoryengine.cpp \
     factorygrid.cpp \
@@ -29,7 +29,8 @@ SOURCES += \
 HEADERS += \
     assembler.h \
     bugtracker.h \
-    converyor.h \
+    conveyor.h \
+    direction.h \
     drill.h \
     factoryengine.h \
     factorygrid.h \

@@ -1,6 +1,6 @@
 release/assembler.o
 release/bugtracker.o
-release/converyor.o
+release/conveyor.o
 release/drill.o
 release/factoryengine.o
 release/factorygrid.o
