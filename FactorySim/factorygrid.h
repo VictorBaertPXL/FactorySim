@@ -1,4 +1,3 @@
-// vraag 22: useful member variabel
 // vraag 36: useful container class
 
 #ifndef FACTORYGRID_H

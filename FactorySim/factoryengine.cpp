@@ -1,12 +1,15 @@
 #include "FactoryEngine.h"
 
-// vraag 12: default constructor
 FactoryEngine::FactoryEngine()
-    : grid(20, 20) // vraag 13: parameterized constructor
 {
 }
 
-FactoryGrid& FactoryEngine::getGrid()
+void FactoryEngine::addMachine(Machine* m)
 {
-    return grid;
+    machines.push_back(m);
+}
+
+const std::vector<Machine*>& FactoryEngine::getMachines() const
+{
+    return machines;
 }

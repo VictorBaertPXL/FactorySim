@@ -1,27 +1,43 @@
 #include "FactoryView.h"
+#include "Drill.h"
 
-// vraag 12: default constructor
-FactoryView::FactoryView(FactoryEngine* eng, QWidget* parent)
-    : QWidget(parent), engine(eng)
+
+FactoryView::FactoryView(FactoryEngine* eng, ToolbarController* tb, QWidget* parent)
+    : QWidget(parent), engine(eng), toolbar(tb)
 {
 }
 
 void FactoryView::paintEvent(QPaintEvent*)
 {
-    // vraag 42: useful Qt class (QPainter)
     QPainter p(this);
-
-    FactoryGrid& grid = engine->getGrid();
 
     int cellSize = 30;
 
-    // vraag 20: useful member function
-    for (int r = 0; r < grid.getRows(); ++r)
+    for (int r = 0; r < 20; ++r)
     {
-        for (int c = 0; c < grid.getCols(); ++c)
+        for (int c = 0; c < 20; ++c)
         {
             p.setBrush(Qt::lightGray);
             p.drawRect(c * cellSize, r * cellSize, cellSize, cellSize);
         }
+    }
+
+    for (auto* m : engine->getMachines())   // vraag 18: dynamic polymorphism
+    {
+        m->draw(p);
+    }
+}
+
+void FactoryView::mousePressEvent(QMouseEvent* event)
+{
+    int cellSize = 30;
+
+    int col = event->position().x() / cellSize;
+    int row = event->position().y() / cellSize;
+
+    if (toolbar->currentTool() == Tool::PlaceDrill)
+    {
+        engine->addMachine(new Drill(row, col));   // vraag 18
+        update();
     }
 }

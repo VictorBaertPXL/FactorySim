@@ -1,8 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "FactoryView.h"
-
-// vraag 47: usage of a GUI
+#include "ToolbarController.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,10 +9,16 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // vraag 22: useful member variable
     engine = new FactoryEngine();
+    toolbar = new ToolbarController(this);
 
-    FactoryView* view = new FactoryView(engine, this);
+    connect(ui->actionAddDrill, &QAction::triggered,
+            toolbar, &ToolbarController::onAddDrillClicked);
+
+    connect(ui->actionDeselect, &QAction::triggered,
+            toolbar, &ToolbarController::onDeselectClicked);
+
+    FactoryView* view = new FactoryView(engine, toolbar, this);
     setCentralWidget(view);
 }
 

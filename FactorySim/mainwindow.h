@@ -1,10 +1,9 @@
-// vraag 47: usage of a GUI
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
 #include "FactoryEngine.h"
+#include "ToolbarController.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,8 +20,8 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    // vraag 22: useful member variable
-    FactoryEngine* engine;
+    FactoryEngine* engine;        // vraag 22: useful member variable
+    ToolbarController* toolbar;   // vraag 22: useful member variable
 };
 
-#endif // MAINWINDOW_H
+#endif

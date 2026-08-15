@@ -1,6 +1,7 @@
 release/assembler.o
 release/bugtracker.o
 release/converyor.o
+release/drill.o
 release/factoryengine.o
 release/factorygrid.o
 release/factoryview.o
@@ -9,10 +10,10 @@ release/item.o
 release/machine.o
 release/main.o
 release/mainwindow.o
-release/miner.o
 release/renderer.o
 release/simulationthread.o
 release/smelter.o
 release/toolbarcontroller.o
 release/moc_factoryview.o
 release/moc_mainwindow.o
+release/moc_toolbarcontroller.o

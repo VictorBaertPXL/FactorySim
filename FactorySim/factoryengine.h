@@ -1,22 +1,21 @@
-// vraag 20: useful member function
-// vraag 22: useful member variabel
+// vraag 36: useful container class
 
 #ifndef FACTORYENGINE_H
 #define FACTORYENGINE_H
 
-#include "FactoryGrid.h"
+#include <vector>
+#include "Machine.h"
 
 class FactoryEngine
 {
 public:
-    // vraag 12: default constructor
     FactoryEngine();
 
-    // vraag 20: useful member function
-    FactoryGrid& getGrid();
+    void addMachine(Machine* m);   // vraag 20: useful member function
+    const std::vector<Machine*>& getMachines() const;
 
 private:
-    FactoryGrid grid;
+    std::vector<Machine*> machines;   // vraag 36
 };
 
 #endif

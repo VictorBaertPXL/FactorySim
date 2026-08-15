@@ -12,6 +12,7 @@ SOURCES += \
     assembler.cpp \
     bugtracker.cpp \
     converyor.cpp \
+    drill.cpp \
     factoryengine.cpp \
     factorygrid.cpp \
     factoryview.cpp \
@@ -20,7 +21,6 @@ SOURCES += \
     machine.cpp \
     main.cpp \
     mainwindow.cpp \
-    miner.cpp \
     renderer.cpp \
     simulationthread.cpp \
     smelter.cpp \
@@ -30,6 +30,7 @@ HEADERS += \
     assembler.h \
     bugtracker.h \
     converyor.h \
+    drill.h \
     factoryengine.h \
     factorygrid.h \
     factoryview.h \
@@ -37,7 +38,6 @@ HEADERS += \
     item.h \
     machine.h \
     mainwindow.h \
-    miner.h \
     renderer.h \
     simulationthread.h \
     smelter.h \

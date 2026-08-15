@@ -11,20 +11,42 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>FactorySim</string>
   </property>
+
   <widget class="QWidget" name="centralwidget"/>
+
   <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>21</height>
-    </rect>
-   </property>
+   <addaction name="menuTools"/>
   </widget>
+
+  <widget class="QMenu" name="menuTools">
+   <property name="title">
+    <string>Tools</string>
+   </property>
+   <addaction name="actionAddDrill"/>
+   <addaction name="actionDeselect"/>
+  </widget>
+
+  <widget class="QToolBar" name="toolBar">
+   <addaction name="actionAddDrill"/>
+   <addaction name="actionDeselect"/>
+  </widget>
+
   <widget class="QStatusBar" name="statusbar"/>
+
+  <action name="actionAddDrill">
+   <property name="text">
+    <string>Add Drill</string>
+   </property>
+  </action>
+
+  <action name="actionDeselect">
+   <property name="text">
+    <string>Deselect</string>
+   </property>
+  </action>
+
  </widget>
  <resources/>
  <connections/>
