@@ -12,7 +12,7 @@ FactoryView::FactoryView(FactoryEngine* eng, ToolbarController* tb, QWidget* par
 {
     QTimer* timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &FactoryView::tick);
-    timer->start(200); //200ms
+    timer->start(8); // smooth movement
 }
 
 void FactoryView::tick()
@@ -26,7 +26,7 @@ void FactoryView::paintEvent(QPaintEvent*)
     QPainter p(this);
     int cellSize = 30;
 
-    // Grid tekenen
+    // Grid
     for (int r = 0; r < 20; ++r)
     {
         for (int c = 0; c < 20; ++c)
@@ -36,13 +36,11 @@ void FactoryView::paintEvent(QPaintEvent*)
         }
     }
 
-    // Machines tekenen
+    // Machines
     for (auto* m : engine->getMachines())
-    {
         m->draw(p);
-    }
 
-    // Items tekenen
+    // Items (pixel position!)
     for (auto* m : engine->getMachines())
     {
         if (auto* c = dynamic_cast<Conveyor*>(m))
@@ -50,9 +48,7 @@ void FactoryView::paintEvent(QPaintEvent*)
             for (auto* it : c->getBuffer())
             {
                 p.setBrush(Qt::red);
-                p.drawEllipse(it->col() * cellSize + 10,
-                              it->row() * cellSize + 10,
-                              10, 10);
+                p.drawEllipse(it->px + 10, it->py + 10, 10, 10);
             }
         }
 
@@ -61,9 +57,7 @@ void FactoryView::paintEvent(QPaintEvent*)
             for (auto* it : d->getBuffer())
             {
                 p.setBrush(Qt::red);
-                p.drawEllipse(it->col() * cellSize + 10,
-                              it->row() * cellSize + 10,
-                              10, 10);
+                p.drawEllipse(it->px + 10, it->py + 10, 10, 10);
             }
         }
     }
@@ -85,6 +79,29 @@ void FactoryView::mousePressEvent(QMouseEvent* event)
     if (toolbar->currentTool() == Tool::PlaceConveyor)
     {
         engine->addMachine(new Conveyor(row, col, Direction::Right));
+        return;
+    }
+
+    if (toolbar->currentTool() == Tool::RotateConveyor)
+    {
+        for (auto* m : engine->getMachines())
+        {
+            if (m->row() == row && m->col() == col)
+            {
+                if (auto* c = dynamic_cast<Conveyor*>(m))
+                {
+                    c->rotate();
+                    update();
+                    return;
+                }
+            }
+        }
+    }
+
+    if (toolbar->currentTool() == Tool::DeleteMachine)
+    {
+        engine->deleteMachineAt(row, col);
+        update();
         return;
     }
 }

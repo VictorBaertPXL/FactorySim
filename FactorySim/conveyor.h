@@ -1,8 +1,3 @@
-// vraag 7: useful and correct polymorphism
-// vraag 11: virtual function
-// vraag 22: useful member variable
-// vraag 36: useful container class
-
 #ifndef CONVEYOR_H
 #define CONVEYOR_H
 
@@ -19,18 +14,17 @@ class Conveyor : public Machine
 public:
     Conveyor(int r, int c, Direction d);
 
-    void draw(QPainter& p) const override;          // vraag 11
-    void process(FactoryEngine* engine);            // vraag 20
+    void draw(QPainter& p) const override;
+    void process(FactoryEngine* engine);
 
     void acceptItem(Item* it);
-    const std::vector<Item*>& getBuffer() const     // vraag 36
-    {
-        return buffer;
-    }
+    void rotate();
+
+    const std::vector<Item*>& getBuffer() const { return buffer; }
 
 private:
-    Direction dir;               // vraag 22
-    std::vector<Item*> buffer;   // vraag 36
+    Direction dir;
+    std::vector<Item*> buffer;
 };
 
 #endif

@@ -14,17 +14,21 @@ MainWindow::MainWindow(QWidget *parent)
     engine = new FactoryEngine();
     toolbar = new ToolbarController(this);
 
-    // Drill
     connect(ui->actionAddDrill, &QAction::triggered,
-            toolbar, &ToolbarController::onAddDrillClicked);
+            toolbar, &ToolbarController::onPlaceDrillClicked);
 
-    // Conveyor
     connect(ui->actionAddConveyor, &QAction::triggered,
-            toolbar, &ToolbarController::onAddConveyorClicked);
+            toolbar, &ToolbarController::onPlaceConveyorClicked);
 
-    // Deselect
+    connect(ui->actionRotateConveyor, &QAction::triggered,
+            toolbar, &ToolbarController::onRotateConveyorClicked);
+
+    connect(ui->actionDeleteMachine, &QAction::triggered,
+            toolbar, &ToolbarController::onDeleteMachineClicked);
+
     connect(ui->actionDeselect, &QAction::triggered,
             toolbar, &ToolbarController::onDeselectClicked);
+
 
     // View
     FactoryView* view = new FactoryView(engine, toolbar, this);

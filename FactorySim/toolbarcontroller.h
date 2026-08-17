@@ -1,5 +1,3 @@
-// vraag 33: enum
-
 #ifndef TOOLBARCONTROLLER_H
 #define TOOLBARCONTROLLER_H
 
@@ -8,9 +6,10 @@
 enum class Tool {
     None,
     PlaceDrill,
-    PlaceConveyor    // vraag 33
+    PlaceConveyor,
+    RotateConveyor,
+    DeleteMachine
 };
-
 
 class ToolbarController : public QObject
 {
@@ -19,15 +18,17 @@ class ToolbarController : public QObject
 public:
     explicit ToolbarController(QObject* parent = nullptr);
 
-    Tool currentTool() const;
+    Tool currentTool() const { return current; }
 
 public slots:
-    void onAddDrillClicked();
+    void onPlaceDrillClicked();
+    void onPlaceConveyorClicked();
+    void onRotateConveyorClicked();
+    void onDeleteMachineClicked();
     void onDeselectClicked();
-    void onAddConveyorClicked();
 
 private:
-    Tool tool;   // vraag 22: useful member variable
+    Tool current;
 };
 
 #endif

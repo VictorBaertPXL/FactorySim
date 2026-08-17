@@ -1,5 +1,3 @@
-// vraag 22: useful member variable
-
 #ifndef ITEM_H
 #define ITEM_H
 
@@ -8,14 +6,17 @@ class Item
 public:
     Item(int r, int c);
 
-    int row() const;
-    int col() const;
+    int row() const { return r; }
+    int col() const { return c; }
 
-    void setPos(int r, int c);
+    void setPos(int newR, int newC);
+
+    int px; // pixel X
+    int py; // pixel Y
 
 private:
-    int m_row;   // vraag 22
-    int m_col;   // vraag 22
+    int r;
+    int c;
 };
 
 #endif

@@ -1,26 +1,31 @@
 #include "ToolbarController.h"
 
 ToolbarController::ToolbarController(QObject* parent)
-    : QObject(parent), tool(Tool::None)
+    : QObject(parent), current(Tool::None)
 {
 }
 
-Tool ToolbarController::currentTool() const
+void ToolbarController::onPlaceDrillClicked()
 {
-    return tool;
+    current = Tool::PlaceDrill;
 }
 
-void ToolbarController::onAddDrillClicked()
+void ToolbarController::onPlaceConveyorClicked()
 {
-    tool = Tool::PlaceDrill;
+    current = Tool::PlaceConveyor;
+}
+
+void ToolbarController::onRotateConveyorClicked()
+{
+    current = Tool::RotateConveyor;
+}
+
+void ToolbarController::onDeleteMachineClicked()
+{
+    current = Tool::DeleteMachine;
 }
 
 void ToolbarController::onDeselectClicked()
 {
-    tool = Tool::None;
-}
-
-void ToolbarController::onAddConveyorClicked()
-{
-    tool = Tool::PlaceConveyor;
+    current = Tool::None;
 }

@@ -1,5 +1,3 @@
-// vraag 36: useful container class
-
 #ifndef FACTORYENGINE_H
 #define FACTORYENGINE_H
 
@@ -11,13 +9,15 @@ class FactoryEngine
 public:
     FactoryEngine();
 
-    void addMachine(Machine* m);   // vraag 20: useful member function
+    void addMachine(Machine* m);
+    void deleteMachineAt(int row, int col);
+
     const std::vector<Machine*>& getMachines() const;
 
-    void processAll();             // vraag 20: useful member function
+    void processAll();
 
 private:
-    std::vector<Machine*> machines;   // vraag 36
+    std::vector<Machine*> machines;
 };
 
 #endif

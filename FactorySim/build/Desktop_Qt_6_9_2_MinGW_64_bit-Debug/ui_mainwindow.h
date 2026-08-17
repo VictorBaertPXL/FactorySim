@@ -26,6 +26,8 @@ class Ui_MainWindow
 public:
     QAction *actionAddDrill;
     QAction *actionAddConveyor;
+    QAction *actionRotateConveyor;
+    QAction *actionDeleteMachine;
     QAction *actionDeselect;
     QWidget *centralwidget;
     QMenuBar *menubar;
@@ -41,6 +43,10 @@ public:
         actionAddDrill->setObjectName("actionAddDrill");
         actionAddConveyor = new QAction(MainWindow);
         actionAddConveyor->setObjectName("actionAddConveyor");
+        actionRotateConveyor = new QAction(MainWindow);
+        actionRotateConveyor->setObjectName("actionRotateConveyor");
+        actionDeleteMachine = new QAction(MainWindow);
+        actionDeleteMachine->setObjectName("actionDeleteMachine");
         actionDeselect = new QAction(MainWindow);
         actionDeselect->setObjectName("actionDeselect");
         centralwidget = new QWidget(MainWindow);
@@ -62,9 +68,13 @@ public:
         menubar->addAction(menuTools->menuAction());
         menuTools->addAction(actionAddDrill);
         menuTools->addAction(actionAddConveyor);
+        menuTools->addAction(actionRotateConveyor);
+        menuTools->addAction(actionDeleteMachine);
         menuTools->addAction(actionDeselect);
         mainToolBar->addAction(actionAddDrill);
         mainToolBar->addAction(actionAddConveyor);
+        mainToolBar->addAction(actionRotateConveyor);
+        mainToolBar->addAction(actionDeleteMachine);
         mainToolBar->addAction(actionDeselect);
 
         retranslateUi(MainWindow);
@@ -77,6 +87,8 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "FactorySim", nullptr));
         actionAddDrill->setText(QCoreApplication::translate("MainWindow", "Add Drill", nullptr));
         actionAddConveyor->setText(QCoreApplication::translate("MainWindow", "Add Conveyor", nullptr));
+        actionRotateConveyor->setText(QCoreApplication::translate("MainWindow", "Rotate Conveyor", nullptr));
+        actionDeleteMachine->setText(QCoreApplication::translate("MainWindow", "Delete Machine", nullptr));
         actionDeselect->setText(QCoreApplication::translate("MainWindow", "Deselect", nullptr));
         menuTools->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
         mainToolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));

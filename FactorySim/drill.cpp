@@ -1,6 +1,5 @@
 #include "Drill.h"
 #include "FactoryEngine.h"
-#include "Conveyor.h"
 
 Drill::Drill(int r, int c)
     : Machine(r, c)
@@ -19,19 +18,27 @@ void Drill::draw(QPainter& p) const
 
 void Drill::process(FactoryEngine* engine)
 {
-    buffer.push_back(new Item(row(), col()));
+    // Produce item every tick
+    Item* it = new Item(row(), col());
 
-    int nr = row();
-    int nc = col() + 1;
+    // Pixel position
+    it->px = col() * 30;
+    it->py = row() * 30;
 
-    for (auto* m : engine->getMachines())          // vraag 18: dynamic polymorphism
+    buffer.push_back(it);
+
+    // Try to push item to conveyor
+    int r = row();
+    int c = col() + 1; // drill outputs to the right
+
+    for (auto* m : engine->getMachines())
     {
-        if (m->row() == nr && m->col() == nc)
+        if (m->row() == r && m->col() == c)
         {
-            if (auto* c = dynamic_cast<Conveyor*>(m))
+            if (auto* conv = dynamic_cast<Conveyor*>(m))
             {
-                c->acceptItem(buffer.back());
-                buffer.pop_back();
+                conv->acceptItem(it);
+                buffer.erase(buffer.begin());
             }
             return;
         }

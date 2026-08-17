@@ -1,22 +1,17 @@
 #include "Item.h"
 
-Item::Item(int r, int c)
-    : m_row(r), m_col(c)
+Item::Item(int r_, int c_)
+    : r(r_), c(c_)
 {
+    px = c * 30;
+    py = r * 30;
 }
 
-int Item::row() const
+void Item::setPos(int newR, int newC)
 {
-    return m_row;
-}
+    r = newR;
+    c = newC;
 
-int Item::col() const
-{
-    return m_col;
-}
-
-void Item::setPos(int r, int c)
-{
-    m_row = r;
-    m_col = c;
+    px = c * 30;
+    py = r * 30;
 }

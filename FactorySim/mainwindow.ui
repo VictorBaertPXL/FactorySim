@@ -5,7 +5,9 @@
   <property name="windowTitle">
    <string>FactorySim</string>
   </property>
+
   <widget class="QWidget" name="centralwidget"/>
+
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -15,41 +17,70 @@
      <height>22</height>
     </rect>
    </property>
+
    <widget class="QMenu" name="menuTools">
     <property name="title">
      <string>Tools</string>
     </property>
+
     <addaction name="actionAddDrill"/>
     <addaction name="actionAddConveyor"/>
+    <addaction name="actionRotateConveyor"/>
+    <addaction name="actionDeleteMachine"/>
     <addaction name="actionDeselect"/>
    </widget>
+
    <addaction name="menuTools"/>
   </widget>
+
   <widget class="QToolBar" name="mainToolBar">
    <property name="windowTitle">
     <string>Tools</string>
    </property>
+
    <addaction name="actionAddDrill"/>
    <addaction name="actionAddConveyor"/>
+   <addaction name="actionRotateConveyor"/>
+   <addaction name="actionDeleteMachine"/>
    <addaction name="actionDeselect"/>
   </widget>
+
   <widget class="QStatusBar" name="statusbar"/>
+
+  <!-- ACTIONS -->
+
   <action name="actionAddDrill">
    <property name="text">
     <string>Add Drill</string>
    </property>
   </action>
+
   <action name="actionAddConveyor">
    <property name="text">
     <string>Add Conveyor</string>
    </property>
   </action>
+
+  <action name="actionRotateConveyor">
+   <property name="text">
+    <string>Rotate Conveyor</string>
+   </property>
+  </action>
+
+  <action name="actionDeleteMachine">
+   <property name="text">
+    <string>Delete Machine</string>
+   </property>
+  </action>
+
   <action name="actionDeselect">
    <property name="text">
     <string>Deselect</string>
    </property>
   </action>
+
  </widget>
+
  <resources/>
  <connections/>
 </ui>
