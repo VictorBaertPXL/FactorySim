@@ -1,4 +1,5 @@
 #include "FactoryEngine.h"
+#include "Drill.h"
 #include "Conveyor.h"
 
 FactoryEngine::FactoryEngine()
@@ -19,10 +20,10 @@ void FactoryEngine::processAll()
 {
     for (auto* m : machines)
     {
-        Conveyor* c = dynamic_cast<Conveyor*>(m);
-        if (c)
-        {
-            c->process(this);   // vraag 20
-        }
+        if (auto* d = dynamic_cast<Drill*>(m))      // vraag 18
+            d->process(this);
+
+        if (auto* c = dynamic_cast<Conveyor*>(m))   // vraag 18
+            c->process(this);
     }
 }

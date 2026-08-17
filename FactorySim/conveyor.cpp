@@ -6,6 +6,11 @@ Conveyor::Conveyor(int r, int c, Direction d)
 {
 }
 
+void Conveyor::acceptItem(Item* it)
+{
+    buffer.push_back(it);
+}
+
 void Conveyor::draw(QPainter& p) const
 {
     int cellSize = 30;
@@ -17,21 +22,14 @@ void Conveyor::draw(QPainter& p) const
 
     p.setBrush(Qt::black);
 
-    switch (dir)
-    {
-    case Direction::Up:
-        p.drawPolygon(QPolygon({ QPoint(x+15, y+5), QPoint(x+25, y+25), QPoint(x+5, y+25) }));
-        break;
-    case Direction::Down:
-        p.drawPolygon(QPolygon({ QPoint(x+5, y+5), QPoint(x+25, y+5), QPoint(x+15, y+25) }));
-        break;
-    case Direction::Left:
-        p.drawPolygon(QPolygon({ QPoint(x+5, y+15), QPoint(x+25, y+5), QPoint(x+25, y+25) }));
-        break;
-    case Direction::Right:
-        p.drawPolygon(QPolygon({ QPoint(x+5, y+5), QPoint(x+25, y+15), QPoint(x+5, y+25) }));
-        break;
-    }
+    if (dir == Direction::Right)
+        p.drawPolygon(QPolygon({ QPoint(x+5,y+5), QPoint(x+25,y+15), QPoint(x+5,y+25) }));
+    else if (dir == Direction::Left)
+        p.drawPolygon(QPolygon({ QPoint(x+25,y+5), QPoint(x+5,y+15), QPoint(x+25,y+25) }));
+    else if (dir == Direction::Up)
+        p.drawPolygon(QPolygon({ QPoint(x+15,y+5), QPoint(x+25,y+25), QPoint(x+5,y+25) }));
+    else if (dir == Direction::Down)
+        p.drawPolygon(QPolygon({ QPoint(x+5,y+5), QPoint(x+25,y+5), QPoint(x+15,y+25) }));
 }
 
 void Conveyor::process(FactoryEngine* engine)
@@ -39,26 +37,26 @@ void Conveyor::process(FactoryEngine* engine)
     if (buffer.empty())
         return;
 
+    Item* it = buffer.front();
+
     int r = row();
     int c = col();
 
-    int nr = r;
-    int nc = c;
+    if (dir == Direction::Right) c++;
+    else if (dir == Direction::Left) c--;
+    else if (dir == Direction::Up) r--;
+    else if (dir == Direction::Down) r++;
 
-    if (dir == Direction::Up)    nr--;
-    if (dir == Direction::Down)  nr++;
-    if (dir == Direction::Left)  nc--;
-    if (dir == Direction::Right) nc++;
+    it->setPos(r, c);
 
-    for (auto* m : engine->getMachines())   // vraag 18: dynamic polymorphism
+    for (auto* m : engine->getMachines())          // vraag 18
     {
-        if (m->row() == nr && m->col() == nc)
+        if (m->row() == r && m->col() == c)
         {
-            Conveyor* next = dynamic_cast<Conveyor*>(m);
-            if (next)
+            if (auto* next = dynamic_cast<Conveyor*>(m))
             {
-                next->buffer.push_back(buffer.back());
-                buffer.pop_back();
+                next->acceptItem(it);
+                buffer.erase(buffer.begin());
             }
             return;
         }

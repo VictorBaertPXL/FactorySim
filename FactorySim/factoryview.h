@@ -1,25 +1,24 @@
-// vraag 11: virtual function
-// vraag 42: useful Qt class
-
 #ifndef FACTORYVIEW_H
 #define FACTORYVIEW_H
 
 #include <QWidget>
-#include <QPainter>
-#include <QMouseEvent>
-#include "FactoryEngine.h"
-#include "ToolbarController.h"
+
+class FactoryEngine;
+class ToolbarController;
 
 class FactoryView : public QWidget
 {
     Q_OBJECT
 
 public:
-    FactoryView(FactoryEngine* engine, ToolbarController* toolbar, QWidget* parent = nullptr);
+    FactoryView(FactoryEngine* eng, ToolbarController* tb, QWidget* parent = nullptr);
 
 protected:
-    void paintEvent(QPaintEvent* event) override;       // vraag 11
-    void mousePressEvent(QMouseEvent* event) override;  // vraag 11
+    void paintEvent(QPaintEvent* event) override;
+    void mousePressEvent(QMouseEvent* event) override;
+
+private slots:
+    void tick();
 
 private:
     FactoryEngine* engine;
