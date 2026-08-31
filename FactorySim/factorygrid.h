@@ -1,35 +1,31 @@
+// vraag 3: useful and correct class
+// vraag 4: useful and correct abstraction
+// vraag 5: useful and correct encapsulation
+// vraag 8: useful and correct object composition
+// vraag 22: useful member variable
 // vraag 36: useful container class
 
 #ifndef FACTORYGRID_H
 #define FACTORYGRID_H
 
-#include <vector>
+#include <vector>   // vraag 36: useful container class
 
 class FactoryGrid
 {
 public:
-    // vraag 12: default constructor
-    FactoryGrid();
+    FactoryGrid();                 // vraag 12: default constructor
+    FactoryGrid(int rows, int cols); // vraag 13: parameterized constructor
+    FactoryGrid(const FactoryGrid& other); // vraag 14: copy constructor
+    ~FactoryGrid();                // vraag 15: destructor
 
-    // vraag 13: parameterized constructor
-    FactoryGrid(int rows, int cols);
-
-    // vraag 14: copy constructor
-    FactoryGrid(const FactoryGrid& other);
-
-    // vraag 15: destructor
-    ~FactoryGrid();
-
-    // vraag 20: useful member function
-    int getRows() const;
-    int getCols() const;
+    int getRows() const;           // vraag 20: useful member function
+    int getCols() const;           // vraag 20
 
 private:
-    int rows;
-    int cols;
+    int rows;                      // vraag 22: useful member variable
+    int cols;                      // vraag 22
 
-    // vraag 36: useful container class
-    std::vector<std::vector<int>> grid;
+    std::vector<std::vector<int>> grid;   // vraag 36: useful container class
 };
 
 #endif

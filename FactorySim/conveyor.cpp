@@ -1,108 +1,138 @@
 #include "Conveyor.h"
 #include "FactoryEngine.h"
-#include <cmath>
+#include "Assembler.h"
+#include "Item.h"
+#include "Utils.h"
 
 Conveyor::Conveyor(int r, int c, Direction d)
-    : Machine(r, c), dir(d)
+    : Machine(r, c), dir(d)   // vraag 16: member initialization list
 {
 }
 
-void Conveyor::acceptItem(Item* it)
+Conveyor::~Conveyor()   // vraag 15: destructor
 {
-    // Reset pixel position to conveyor tile
-    it->px = col() * 30;
-    it->py = row() * 30;
-
-    buffer.push_back(it);
-}
-
-void Conveyor::rotate()
-{
-    if (dir == Direction::Right) dir = Direction::Down;
-    else if (dir == Direction::Down) dir = Direction::Left;
-    else if (dir == Direction::Left) dir = Direction::Up;
-    else if (dir == Direction::Up) dir = Direction::Right;
 }
 
 void Conveyor::draw(QPainter& p) const
 {
     int cellSize = 30;
-    int x = col() * cellSize;
-    int y = row() * cellSize;
+    int x = gridX();
+    int y = gridY();
 
-    p.setBrush(Qt::yellow);
+    p.setBrush(QColor(255, 220, 0));
     p.drawRect(x, y, cellSize, cellSize);
 
-    p.setBrush(Qt::black);
+    p.setPen(Qt::black);
 
-    if (dir == Direction::Right)
-        p.drawPolygon(QPolygon({ QPoint(x+5,y+5), QPoint(x+25,y+15), QPoint(x+5,y+25) }));
-
-    else if (dir == Direction::Left)
-        p.drawPolygon(QPolygon({ QPoint(x+25,y+5), QPoint(x+5,y+15), QPoint(x+25,y+25) }));
-
-    else if (dir == Direction::Up)
-        p.drawPolygon(QPolygon({ QPoint(x+15,y+5), QPoint(x+25,y+25), QPoint(x+5,y+25) }));
-
-    else if (dir == Direction::Down)
-        p.drawPolygon(QPolygon({ QPoint(x+5,y+5), QPoint(x+25,y+5), QPoint(x+15,y+25) }));
+    switch (dir)
+    {
+    case Direction::Right: p.drawText(x + 10, y + 20, ">"); break;
+    case Direction::Left:  p.drawText(x + 10, y + 20, "<"); break;
+    case Direction::Up:    p.drawText(x + 10, y + 20, "^"); break;
+    case Direction::Down:  p.drawText(x + 10, y + 20, "v"); break;
+    }
 }
 
-void Conveyor::process(FactoryEngine* engine)
+void Conveyor::acceptItem(Item* it)   // vraag 23: useful setter
+{
+    buffer.push_back(it);             // vraag 36: useful container class
+}
+
+std::vector<Item*>& Conveyor::getBuffer()   // vraag 23: useful getter
+{
+    return buffer;
+}
+
+Direction Conveyor::getDirection() const    // vraag 23: useful getter
+{
+    return dir;
+}
+
+void Conveyor::rotate(int steps)            // vraag 21: default value in function
+{
+    int s = steps % 4;
+    if (s < 0) s += 4;
+
+    for (int i = 0; i < s; ++i)
+    {
+        switch (dir)
+        {
+        case Direction::Right: dir = Direction::Down; break;
+        case Direction::Down:  dir = Direction::Left; break;
+        case Direction::Left:  dir = Direction::Up; break;
+        case Direction::Up:    dir = Direction::Right; break;
+        }
+    }
+}
+
+void Conveyor::process(FactoryEngine* engine)   // vraag 20: useful member function
 {
     if (buffer.empty())
         return;
 
-    Item* it = buffer.front();
+    int cellSize = 30;
 
-    const int speed = 6; // pixels per tick
-
-    // Smooth pixel movement
-    if (dir == Direction::Right) it->px += speed;
-    if (dir == Direction::Left)  it->px -= speed;
-    if (dir == Direction::Up)    it->py -= speed;
-    if (dir == Direction::Down)  it->py += speed;
-
-    // Target tile
-    int targetRow = row();
-    int targetCol = col();
-
-    if (dir == Direction::Right) targetCol++;
-    if (dir == Direction::Left)  targetCol--;
-    if (dir == Direction::Up)    targetRow--;
-    if (dir == Direction::Down)  targetRow++;
-
-    // Out of bounds protection
-    if (targetRow < 0 || targetRow >= 20 ||
-        targetCol < 0 || targetCol >= 20)
+    for (size_t i = 0; i < buffer.size(); ++i)
     {
-        buffer.erase(buffer.begin());
-        delete it;
-        return;
-    }
+        Item* it = buffer[i];
+        if (!it) continue;
 
-    int targetPx = targetCol * 30;
-    int targetPy = targetRow * 30;
+        int speed = clampValue<int>(2, 1, 5);   // vraag 25: template function
 
-    // Reached next tile?
-    if (std::abs(it->px - targetPx) <= speed &&
-        std::abs(it->py - targetPy) <= speed)
-    {
-        it->px = targetPx;
-        it->py = targetPy;
-        it->setPos(targetRow, targetCol);
-
-        // Pass item to next machine
-        for (auto* m : engine->getMachines())
+        switch (dir)
         {
-            if (m->row() == targetRow && m->col() == targetCol)
+        case Direction::Right: it->px += speed; break;
+        case Direction::Left:  it->px -= speed; break;
+        case Direction::Up:    it->py -= speed; break;
+        case Direction::Down:  it->py += speed; break;
+        }
+
+        int targetRow = row();
+        int targetCol = col();
+
+        switch (dir)
+        {
+        case Direction::Right: targetCol++; break;
+        case Direction::Left:  targetCol--; break;
+        case Direction::Up:    targetRow--; break;
+        case Direction::Down:  targetRow++; break;
+        }
+
+        int itemCol = (it->px + cellSize / 2) / cellSize;
+        int itemRow = (it->py + cellSize / 2) / cellSize;
+
+        if (itemCol == targetCol && itemRow == targetRow)
+        {
+            bool delivered = false;
+
+            for (auto* m : engine->getMachines())   // vraag 18: dynamic polymorphism
             {
-                if (auto* next = dynamic_cast<Conveyor*>(m))
+                if (m->row() == targetRow && m->col() == targetCol)
                 {
-                    next->acceptItem(it);
-                    buffer.erase(buffer.begin());
+                    if (auto* nextConv = dynamic_cast<Conveyor*>(m))   // vraag 18
+                    {
+                        nextConv->acceptItem(it);
+                        buffer.erase(buffer.begin() + i);              // vraag 36
+                        i--;
+                        delivered = true;
+                        break;
+                    }
+
+                    if (auto* nextAsm = dynamic_cast<Assembler*>(m))   // vraag 18
+                    {
+                        nextAsm->acceptItem(it);
+                        buffer.erase(buffer.begin() + i);              // vraag 36
+                        i--;
+                        delivered = true;
+                        break;
+                    }
                 }
-                return;
+            }
+
+            if (!delivered)
+            {
+                it->px = targetCol * cellSize;
+                it->py = targetRow * cellSize;
             }
         }
     }

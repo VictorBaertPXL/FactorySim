@@ -25,6 +25,7 @@
 
     <addaction name="actionAddDrill"/>
     <addaction name="actionAddConveyor"/>
+    <addaction name="actionAddAssembler"/>
     <addaction name="actionRotateConveyor"/>
     <addaction name="actionDeleteMachine"/>
     <addaction name="actionDeselect"/>
@@ -40,6 +41,7 @@
 
    <addaction name="actionAddDrill"/>
    <addaction name="actionAddConveyor"/>
+   <addaction name="actionAddAssembler"/>
    <addaction name="actionRotateConveyor"/>
    <addaction name="actionDeleteMachine"/>
    <addaction name="actionDeselect"/>
@@ -58,6 +60,12 @@
   <action name="actionAddConveyor">
    <property name="text">
     <string>Add Conveyor</string>
+   </property>
+  </action>
+
+  <action name="actionAddAssembler">
+   <property name="text">
+    <string>Add Assembler</string>
    </property>
   </action>
 

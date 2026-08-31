@@ -42,6 +42,7 @@ template <> constexpr inline auto ToolbarController::qt_create_metaobjectdata<qt
         "onPlaceDrillClicked",
         "",
         "onPlaceConveyorClicked",
+        "onPlaceAssemblerClicked",
         "onRotateConveyorClicked",
         "onDeleteMachineClicked",
         "onDeselectClicked"
@@ -52,12 +53,14 @@ template <> constexpr inline auto ToolbarController::qt_create_metaobjectdata<qt
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'onPlaceConveyorClicked'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'onRotateConveyorClicked'
+        // Slot 'onPlaceAssemblerClicked'
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'onDeleteMachineClicked'
+        // Slot 'onRotateConveyorClicked'
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPublic, QMetaType::Void),
-        // Slot 'onDeselectClicked'
+        // Slot 'onDeleteMachineClicked'
         QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'onDeselectClicked'
+        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -83,9 +86,10 @@ void ToolbarController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         switch (_id) {
         case 0: _t->onPlaceDrillClicked(); break;
         case 1: _t->onPlaceConveyorClicked(); break;
-        case 2: _t->onRotateConveyorClicked(); break;
-        case 3: _t->onDeleteMachineClicked(); break;
-        case 4: _t->onDeselectClicked(); break;
+        case 2: _t->onPlaceAssemblerClicked(); break;
+        case 3: _t->onRotateConveyorClicked(); break;
+        case 4: _t->onDeleteMachineClicked(); break;
+        case 5: _t->onDeselectClicked(); break;
         default: ;
         }
     }
@@ -111,14 +115,14 @@ int ToolbarController::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

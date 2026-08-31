@@ -10,39 +10,29 @@ CONFIG += c++17
 
 SOURCES += \
     assembler.cpp \
-    bugtracker.cpp \
     conveyor.cpp \
     drill.cpp \
     factoryengine.cpp \
     factorygrid.cpp \
     factoryview.cpp \
-    filemanager.cpp \
     item.cpp \
-    machine.cpp \
     main.cpp \
     mainwindow.cpp \
-    renderer.cpp \
-    simulationthread.cpp \
-    smelter.cpp \
     toolbarcontroller.cpp
 
 HEADERS += \
     assembler.h \
-    bugtracker.h \
     conveyor.h \
     direction.h \
     drill.h \
     factoryengine.h \
     factorygrid.h \
     factoryview.h \
-    filemanager.h \
     item.h \
     machine.h \
     mainwindow.h \
-    renderer.h \
-    simulationthread.h \
-    smelter.h \
-    toolbarcontroller.h
+    toolbarcontroller.h \
+    utils.h
 
 FORMS += \
     mainwindow.ui

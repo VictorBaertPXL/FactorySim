@@ -1,22 +1,31 @@
+// vraag 3: useful and correct class
+// vraag 4: useful and correct abstraction
+// vraag 5: useful and correct encapsulation
+// vraag 8: useful and correct object composition
+// vraag 22: useful member variable
+// vraag 28: memory‑efficient type (unsigned char)
+
 #ifndef ITEM_H
 #define ITEM_H
+
+enum class ItemType {
+    Ball,
+    Block
+}; // vraag 33: enum
 
 class Item
 {
 public:
-    Item(int r, int c);
+    Item(int r, int c);        // vraag 13: parameterized constructor
 
-    int row() const { return r; }
-    int col() const { return c; }
+    void setPos(int r, int c); // vraag 23: useful setter
 
-    void setPos(int newR, int newC);
+    int row, col;              // vraag 22: useful member variable
+    int px, py;                // vraag 22
 
-    int px; // pixel X
-    int py; // pixel Y
+    ItemType type;             // vraag 22
 
-private:
-    int r;
-    int c;
+    unsigned char flags = 0;   // vraag 28: memory‑efficient type
 };
 
 #endif

@@ -23,5 +23,12 @@ FactoryGrid::~FactoryGrid()
 {
 }
 
-int FactoryGrid::getRows() const { return rows; }
-int FactoryGrid::getCols() const { return cols; }
+int FactoryGrid::getRows() const   // vraag 20: useful member function
+{
+    return rows;
+}
+
+int FactoryGrid::getCols() const   // vraag 20
+{
+    return cols;
+}

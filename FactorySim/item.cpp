@@ -1,17 +1,14 @@
 #include "Item.h"
 
-Item::Item(int r_, int c_)
-    : r(r_), c(c_)
+Item::Item(int r, int c)
+    : row(r), col(c), px(c * 30), py(r * 30), type(ItemType::Ball)   // vraag 16: member initialization list
 {
-    px = c * 30;
-    py = r * 30;
 }
 
-void Item::setPos(int newR, int newC)
+void Item::setPos(int r, int c)   // vraag 23: useful setter
 {
-    r = newR;
-    c = newC;
-
+    row = r;
+    col = c;
     px = c * 30;
     py = r * 30;
 }

@@ -26,6 +26,7 @@ class Ui_MainWindow
 public:
     QAction *actionAddDrill;
     QAction *actionAddConveyor;
+    QAction *actionAddAssembler;
     QAction *actionRotateConveyor;
     QAction *actionDeleteMachine;
     QAction *actionDeselect;
@@ -43,6 +44,8 @@ public:
         actionAddDrill->setObjectName("actionAddDrill");
         actionAddConveyor = new QAction(MainWindow);
         actionAddConveyor->setObjectName("actionAddConveyor");
+        actionAddAssembler = new QAction(MainWindow);
+        actionAddAssembler->setObjectName("actionAddAssembler");
         actionRotateConveyor = new QAction(MainWindow);
         actionRotateConveyor->setObjectName("actionRotateConveyor");
         actionDeleteMachine = new QAction(MainWindow);
@@ -68,11 +71,13 @@ public:
         menubar->addAction(menuTools->menuAction());
         menuTools->addAction(actionAddDrill);
         menuTools->addAction(actionAddConveyor);
+        menuTools->addAction(actionAddAssembler);
         menuTools->addAction(actionRotateConveyor);
         menuTools->addAction(actionDeleteMachine);
         menuTools->addAction(actionDeselect);
         mainToolBar->addAction(actionAddDrill);
         mainToolBar->addAction(actionAddConveyor);
+        mainToolBar->addAction(actionAddAssembler);
         mainToolBar->addAction(actionRotateConveyor);
         mainToolBar->addAction(actionDeleteMachine);
         mainToolBar->addAction(actionDeselect);
@@ -87,6 +92,7 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "FactorySim", nullptr));
         actionAddDrill->setText(QCoreApplication::translate("MainWindow", "Add Drill", nullptr));
         actionAddConveyor->setText(QCoreApplication::translate("MainWindow", "Add Conveyor", nullptr));
+        actionAddAssembler->setText(QCoreApplication::translate("MainWindow", "Add Assembler", nullptr));
         actionRotateConveyor->setText(QCoreApplication::translate("MainWindow", "Rotate Conveyor", nullptr));
         actionDeleteMachine->setText(QCoreApplication::translate("MainWindow", "Delete Machine", nullptr));
         actionDeselect->setText(QCoreApplication::translate("MainWindow", "Deselect", nullptr));
